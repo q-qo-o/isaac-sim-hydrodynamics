@@ -35,8 +35,7 @@ This extension provides high-fidelity hydrodynamic simulation capabilities for R
 - **Characteristic Length**: Reference length used for dimensionless coefficient calculations (optional). If set to 0, it is computed dynamically from the object's geometry.
 
 ### Hydrodynamic Coefficients
-The extension uses the standard update equation:
-$$ F_{hydro} = -( D_{linear} V + D_{quadratic} |V|V + M_{added} \dot{V} ) $$
+The extension uses the standard update equation: $F_{hydro} = -( D_{linear} V + D_{quadratic} |V|V + M_{added} \dot{V} )$
 
 Where $V$ is the velocity vector $[u, v, w, p, q, r]^T$.
 
