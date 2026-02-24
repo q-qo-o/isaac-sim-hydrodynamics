@@ -144,16 +144,38 @@ class Extension(omni.ext.IExt):
             
             # Manually create attributes if script hasn't initialized yet
             from pxr import Sdf
-            for var in [
-                {"name": "waterLevel", "type": Sdf.ValueTypeNames.Float, "default": 0.0},
-                {"name": "fluidDensity", "type": Sdf.ValueTypeNames.Float, "default": 1000.0},
-                {"name": "gravity", "type": Sdf.ValueTypeNames.Float, "default": 9.81},
-            ]:
+            
+            vars_to_create = [
+                # Fluid Properties
+                {"name": "waterLevel", "type": Sdf.ValueTypeNames.Float, "default": 0.0, "group": "Fluid Properties"},
+                {"name": "fluidDensity", "type": Sdf.ValueTypeNames.Float, "default": 1000.0, "group": "Fluid Properties"},
+                {"name": "gravity", "type": Sdf.ValueTypeNames.Float, "default": 9.81, "group": "Fluid Properties"},
+                {"name": "characteristicLength", "type": Sdf.ValueTypeNames.Float, "default": 0.0, "group": "Fluid Properties"},
+            ]
+            
+            # Linear Damping Derivatives
+            for name in ["linearDampingForward", "linearDampingLateral", "linearDampingVertical", 
+                     "linearDampingRoll", "linearDampingPitch", "linearDampingYaw"]:
+                vars_to_create.append({"name": name, "type": Sdf.ValueTypeNames.Float, "default": 0.0, "group": "Linear Damping Derivatives"})
+                
+            # Quadratic Damping Derivatives
+            for name in ["quadraticDampingForward", "quadraticDampingLateral", "quadraticDampingVertical",
+                      "quadraticDampingRoll", "quadraticDampingPitch", "quadraticDampingYaw"]:
+                vars_to_create.append({"name": name, "type": Sdf.ValueTypeNames.Float, "default": 0.0, "group": "Quadratic Damping Derivatives"})
+
+            # Added Mass Derivatives
+            for name in ["addedMassForward", "addedMassLateral", "addedMassVertical",
+                        "addedMassRoll", "addedMassPitch", "addedMassYaw"]:
+                vars_to_create.append({"name": name, "type": Sdf.ValueTypeNames.Float, "default": 0.0, "group": "Added Mass Derivatives"})
+
+            for var in vars_to_create:
                 attr_name = f"exposedVar:hydrodynamics:{var['name']}"
                 attr = prim.GetAttribute(attr_name)
                 if not attr:
                     attr = prim.CreateAttribute(attr_name, var["type"])
                     attr.Set(var["default"])
+                    if var.get("group"):
+                        attr.SetDisplayGroup(var["group"])
             
             import omni.kit.window.property as property_window_module
             window = property_window_module.get_window()

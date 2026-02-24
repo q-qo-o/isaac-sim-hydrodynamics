@@ -56,9 +56,15 @@ class HydrodynamicsPropertyWidget(UsdPropertiesWidget):
             if not self._multiple_selection:
                 prim_path = ""
 
+            # Check for explicit displayGroup metadata
+            custom_group = prop.metadata.get("displayGroup")
             prop_name = prop.prop_name
             parts = prop_name.split(":")
-            if len(parts) >= 3:
+            display_name = parts[-1]
+
+            if custom_group:
+                new_display_group = f"{prim_path}:{custom_group}" if prim_path else custom_group
+            elif len(parts) >= 3:
                 parts = parts[1:]
                 display_name = parts[-1]
                 group_titles = [self._make_capitalized_title(part) for part in parts[:-1]]

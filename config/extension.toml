@@ -9,11 +9,13 @@ order = 0
 
 [package]
 version = "0.1.0"
+authors = ["q-qo-o"]
+repository = "https://github.com/q-qo-o/isaac-sim-hydrodynamics"
 title = "Hydrodynamics"
 description = "Hydrodynamics plugin for isaac-sim"
 keywords = ["hydrodynamics"]
 changelog = "docs/CHANGELOG.md"
-readme = "docs/README.md"
+readme = "README.md"
 preview_image = "data/preview.png"
 icon = "data/icon.png"
 
