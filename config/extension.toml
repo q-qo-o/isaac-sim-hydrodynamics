@@ -1,0 +1,51 @@
+# Extension configuration file.
+# Visit the "Extension configuration file (extension.toml)" section for more details:
+# https://docs.omniverse.nvidia.com/kit/docs/kit-manual/latest/guide/extensions_advanced.html
+#
+
+[core]
+reloadable = true
+order = 0
+
+[package]
+version = "0.1.0"
+title = "Hydrodynamics"
+description = "Hydrodynamics plugin for isaac-sim"
+keywords = ["hydrodynamics"]
+changelog = "docs/CHANGELOG.md"
+readme = "docs/README.md"
+preview_image = "data/preview.png"
+icon = "data/icon.png"
+
+[dependencies]
+"omni.graph" = {}
+"omni.graph.tools" = {}
+"omni.kit.uiapp" = {}
+"omni.kit.context_menu" = {}
+"omni.kit.commands" = {}
+"omni.physx" = {}
+"omni.usd" = {}
+"omni.kit.scripting" = {}
+"omni.kit.window.property" = {}
+
+# define the Python module that the extension provides
+[[python.module]]
+name = "hydrodynamics"
+
+# define the Python module for tests
+[[python.module]]
+name = "hydrodynamics.tests"
+
+[settings]
+exts."hydrodynamics".timeout = 5
+
+# disable startup test
+[[test]]
+name = "startup"
+enabled = false
+
+[[test]]
+enabled = true
+dependencies = [
+    "omni.kit.test",
+]
