@@ -35,8 +35,7 @@
 - **Characteristic Length**：无量纲系数计算使用的参考长度。设为 0 时根据几何体动态计算。
 
 ### 水动力系数 (Hydrodynamic Coefficients)
-本扩展使用以下标准的运动方程更新力：
-$$ F_{hydro} = -( D_{linear} V + D_{quadratic} |V|V + M_{added} \dot{V} ) $$
+本扩展使用以下标准的运动方程更新力： $F_{hydro} = -( D_{linear} V + D_{quadratic} |V|V + M_{added} \dot{V} )$
 
 其中 $V$ 是速度向量 $[u, v, w, p, q, r]^T$。
 
