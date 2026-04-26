@@ -105,7 +105,7 @@ class Extension(omni.ext.IExt):
         src_script_path = os.path.join(ext_path, "hydrodynamics", "impl", "hydrodynamics_script.py")
 
         if layer.anonymous:
-            carb.log_warning("Stage is unsaved. Using absolute path for the script.")
+            carb.log_warn("Stage is unsaved. Using absolute path for the script.")
             script_path_to_set = src_script_path.replace("\\", "/")
         else:
             usd_dir = os.path.dirname(layer.realPath)
